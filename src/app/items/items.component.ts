@@ -10,20 +10,26 @@ export class ItemsComponent implements OnInit {
 
   public items: any[];
   public totalItems: number;
+  public pageSize: number = 5;
 
   constructor(
     private service: ItemsService
   ) { }
 
   ngOnInit() {
-    this.getData();
+    this.getData(1);
   }
 
-  getData() {
-    this.service.getItems(0).subscribe(response => {
+  getData(page: number): void {
+    this.items = undefined;
+    this.service.getItems(page).subscribe(response => {
       this.totalItems = response.headers.get('X-Total-Count');
       this.items = response.body;
     });
+  }
+
+  nextPage($event): void {
+    this.getData($event.pageIndex);
   }
 
 }

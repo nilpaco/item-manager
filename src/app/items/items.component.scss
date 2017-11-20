@@ -1,0 +1,15 @@
+:host {
+    mat-card {
+        margin-bottom: 20px;
+        img {
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 2px 2px 0 0;
+        }
+        mat-card-header {
+            div {
+                flex: 1;                
+            }
+        }
+    }
+}
