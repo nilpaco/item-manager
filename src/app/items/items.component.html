@@ -2,4 +2,5 @@
   <li *ngFor="let item of items">{{item.title}}</li>
 </ul>
 
-Total items: {{totalItems}}
+<mat-paginator [length]="totalItems"
+[pageSize]="5"></mat-paginator>
