@@ -9,9 +9,9 @@ export class ItemsService {
 
   constructor(private http: HttpClient) { }
 
-  public getItems(page: number): Observable<Object> {
+  public getItems(page: number): Observable<any> {
     const url = `${this.url}/items?_page=${page}&_limit=5`;
-    return this.http.get(url);
+    return this.http.get(url, {observe: 'response'});
   }
 
 }
