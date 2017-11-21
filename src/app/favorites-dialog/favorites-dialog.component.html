@@ -3,12 +3,19 @@
     <mat-icon>close</mat-icon>
   </button>
 </div>
-<div *ngFor="let favorite of data">
-  {{favorite.title}}
-  <button mat-icon-button color="warn" (click)="addFavorites(favorite)">
-      <mat-icon *ngIf="favorite._liked" aria-label="liked">favorite</mat-icon>
-      <mat-icon *ngIf="!favorite._liked" aria-label="not_liked">favorite_outline</mat-icon>        
-    </button>    
+<div class="container">
+  <mat-card *ngFor="let favorite of data">
+    <img mat-card-image src="../../assets/{{favorite.image}}" alt="{{favorite.title}}">
+    <mat-card-header>
+      <button mat-icon-button color="warn" (click)="addFavorites(favorite)">
+        <mat-icon *ngIf="favorite._liked" aria-label="liked">favorite</mat-icon>
+        <mat-icon *ngIf="!favorite._liked" aria-label="not_liked">favorite_outline</mat-icon>        
+      </button>    
+      <mat-card-title>{{favorite.title}}</mat-card-title>
+    </mat-card-header>      
+  </mat-card>
 </div>
-<div class="msg" *ngIf="data.length === 0">No tienes favoritos!</div>
-<div class="msg" *ngIf="data.length === 0">¯\_(ツ)_/¯</div>
+<ng-container *ngIf="data.length === 0">
+    <div class="msg">No tienes favoritos!</div>
+    <div class="msg">¯\_(ツ)_/¯</div>
+</ng-container>
