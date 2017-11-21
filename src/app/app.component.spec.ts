@@ -1,15 +1,32 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatCardModule,
+  MatPaginatorModule,
+  MatDialogModule,
+  MatInputModule,
+  MatProgressSpinnerModule
+} from '@angular/material';
+import { FavoriteService } from './items/favorite.service';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        MatIconModule,
+        MatButtonModule,
+        MatCardModule,
+        MatDialogModule    
       ],
       declarations: [
         AppComponent
       ],
+      providers: [
+        FavoriteService
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {
