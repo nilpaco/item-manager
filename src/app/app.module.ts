@@ -8,7 +8,8 @@ import {
   MatCardModule,
   MatPaginatorModule,
   MatDialogModule,
-  MatInputModule
+  MatInputModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import { BidiModule } from '@angular/cdk/bidi';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -38,7 +39,8 @@ import { FavoritesDialogComponent } from './favorites-dialog/favorites-dialog.co
     MatCardModule,
     MatDialogModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
   ],
   providers: [ ItemsService, FavoriteService ],
   bootstrap: [AppComponent],

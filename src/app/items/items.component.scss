@@ -10,6 +10,7 @@
             justify-content: space-between;
         }
         span {
+            text-transform: uppercase;
             cursor: pointer;
         }
         mat-icon {
@@ -25,6 +26,10 @@
                 content: 'arrow_drop_up';
             }
         }
+    }
+    .loading {
+        display: flex;
+        justify-content: center;
     }
     mat-card {
         margin-bottom: 20px;

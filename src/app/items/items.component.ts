@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemsService } from '../items.service';
 import { FavoriteService } from './favorite.service';
+import { Subject } from 'rxjs';
+import "rxjs/add/operator/debounceTime";
 
 @Component({
   selector: 'app-items',
@@ -9,6 +11,7 @@ import { FavoriteService } from './favorite.service';
 })
 export class ItemsComponent implements OnInit {
 
+  searchQueryChanged: Subject<string> = new Subject<string>();  
   public items: any[];
   private page: number = 0;
   public totalItems: number;
@@ -29,7 +32,15 @@ export class ItemsComponent implements OnInit {
   constructor(
     private service: ItemsService,
     public data: FavoriteService,
-  ) { }
+  ) {
+    this.searchQueryChanged
+    .debounceTime(1500)
+    .distinctUntilChanged()
+    .subscribe(search => {
+      this.filterBy.search = search;
+      this.getData(this.page);
+     });
+  }
 
   ngOnInit() {
     this.getData(this.page);
@@ -38,11 +49,14 @@ export class ItemsComponent implements OnInit {
     });
   }
 
-  getData(page: number, sortBy?: string): void {
+  getData(page: number): void {
     this.items = undefined;
-    this.service.getItems(page+1, this.filterBy).subscribe(response => {
-      this.totalItems = response.headers.get('X-Total-Count');
-      this.items = this.parseItems(response.body);
+    this.service.getItems(this.page+1, this.filterBy).subscribe(response => {
+      // set timeout to fake server response time
+      setTimeout(() => {
+        this.totalItems = response.headers.get('X-Total-Count');
+        this.items = this.parseItems(response.body);  
+      }, 1000);
     });
   }
 
@@ -65,7 +79,7 @@ export class ItemsComponent implements OnInit {
     this.items = this.parseItems(this.items);
   }
 
-  filter(search: string, orderBy: string): void {
+  sort(orderBy: string): void {
     if (this.filterBy.orderBy !== orderBy) {
       this.filterBy.order = undefined;
     }
@@ -82,7 +96,7 @@ export class ItemsComponent implements OnInit {
   }
 
   valuechange($event) {
-    this.filter($event, this.filterBy.orderBy);
+    this.searchQueryChanged.next($event);    
   }
 
   parseItems(data): any[] {
