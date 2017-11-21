@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
   openDialog(): void {
     let dialogRef = this.dialog.open(FavoritesDialogComponent, {
       width: '450px',
+      height: '400px',
       disableClose: true,
       data: this.favorites 
     });

@@ -5,6 +5,9 @@
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
+  <label>
+      Sort by:
+  </label>
   <div class="sorting">
     <span *ngFor="let f of filters" (click)="sort(f.name)"
       [ngClass]="{'asc': filterBy.orderBy === f.name && filterBy.order === 'asc', 'desc': filterBy.orderBy === f.name && filterBy.order === 'desc'}">
