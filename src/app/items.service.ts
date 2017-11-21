@@ -9,8 +9,12 @@ export class ItemsService {
 
   constructor(private http: HttpClient) { }
 
-  public getItems(page: number): Observable<any> {
-    const url = `${this.url}/items?_page=${page}&_limit=5`;
+  public getItems(page: number, filterBy?): Observable<any> {
+    let sorting = '';
+    if (filterBy) {
+      sorting = `&_sort=${filterBy.orderBy}&_order=${filterBy.order}`;
+    }
+    const url = `${this.url}/items?_page=${page}&_limit=5${sorting}`;
     return this.http.get(url, {observe: 'response'});
   }
 

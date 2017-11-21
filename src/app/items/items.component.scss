@@ -1,4 +1,20 @@
 :host {
+    .asc {
+        mat-icon {
+            vertical-align: middle;                    
+        }
+        mat-icon::before {
+            content: 'arrow_drop_down';
+        }
+    }
+    .desc {
+        mat-icon {
+            vertical-align: bottom;                    
+        }
+        mat-icon::before {
+            content: 'arrow_drop_up';
+        }
+    }
     mat-card {
         margin-bottom: 20px;
         img {

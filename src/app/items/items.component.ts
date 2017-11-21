@@ -13,6 +13,11 @@ export class ItemsComponent implements OnInit {
   public totalItems: number;
   public pageSize: number = 5;
   public favorites: any[];
+  public filterBy = {
+    search: '',
+    orderBy: '',
+    order: ''
+  };
 
   constructor(
     private service: ItemsService,
@@ -26,9 +31,9 @@ export class ItemsComponent implements OnInit {
     });    
   }
 
-  getData(page: number): void {
+  getData(page: number, sortBy?: string): void {
     this.items = undefined;
-    this.service.getItems(page+1).subscribe(response => {
+    this.service.getItems(page+1, this.filterBy).subscribe(response => {
       this.totalItems = response.headers.get('X-Total-Count');
       this.items = this.parseItems(response.body);
     });
@@ -51,6 +56,22 @@ export class ItemsComponent implements OnInit {
     }
     this.data.changeFavoritos(this.favorites);
     this.items = this.parseItems(this.items);
+  }
+
+  filter(search: string, orderBy: string) {
+    if (this.filterBy.orderBy !== orderBy) {
+      this.filterBy.order = undefined;
+    }
+    this.filterBy.orderBy = orderBy;
+    if (this.filterBy.orderBy && !this.filterBy.order) {
+      this.filterBy.order = 'asc';
+    } else if (this.filterBy.orderBy && this.filterBy.order === 'asc') {
+      this.filterBy.order = 'desc';
+    } else if (this.filterBy.orderBy && this.filterBy.order === 'desc') {
+      this.filterBy.order = undefined;
+      this.filterBy.orderBy = undefined;
+    }
+    this.getData(0);
   }
 
   parseItems(data): any[] {
