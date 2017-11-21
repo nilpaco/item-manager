@@ -11,7 +11,7 @@ export class ItemsService {
 
   public getItems(page: number, filterBy?): Observable<any> {
     let sorting = '';
-    if (filterBy) {
+    if (filterBy.orderBy && filterBy.order) {
       sorting = `&_sort=${filterBy.orderBy}&_order=${filterBy.order}`;
     }
     const url = `${this.url}/items?_page=${page}&_limit=5${sorting}`;

@@ -10,6 +10,7 @@ import { FavoriteService } from './favorite.service';
 export class ItemsComponent implements OnInit {
 
   public items: any[];
+  private page: number = 0;
   public totalItems: number;
   public pageSize: number = 5;
   public favorites: any[];
@@ -25,7 +26,7 @@ export class ItemsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getData(0);
+    this.getData(this.page);
     this.data.currentFavoritos.subscribe(favorites => {
       this.favorites = favorites
     });    
@@ -58,7 +59,7 @@ export class ItemsComponent implements OnInit {
     this.items = this.parseItems(this.items);
   }
 
-  filter(search: string, orderBy: string) {
+  filter(search: string, orderBy: string): void {
     if (this.filterBy.orderBy !== orderBy) {
       this.filterBy.order = undefined;
     }
@@ -71,7 +72,7 @@ export class ItemsComponent implements OnInit {
       this.filterBy.order = undefined;
       this.filterBy.orderBy = undefined;
     }
-    this.getData(0);
+    this.getData(this.page);
   }
 
   parseItems(data): any[] {
@@ -83,6 +84,7 @@ export class ItemsComponent implements OnInit {
   }
 
   nextPage($event): void {
+    this.page = $event.pageIndex;
     this.getData($event.pageIndex);
   }
 
