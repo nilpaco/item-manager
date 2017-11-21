@@ -19,6 +19,12 @@ export class ItemsComponent implements OnInit {
     orderBy: '',
     order: ''
   };
+  public filters = [
+    { name: 'title' },
+    { name: 'price' },
+    { name: 'description' },
+    { name: 'email' }
+  ]
 
   constructor(
     private service: ItemsService,
@@ -73,6 +79,10 @@ export class ItemsComponent implements OnInit {
       this.filterBy.orderBy = undefined;
     }
     this.getData(this.page);
+  }
+
+  valuechange($event) {
+    this.filter($event, this.filterBy.orderBy);
   }
 
   parseItems(data): any[] {
