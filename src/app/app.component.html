@@ -3,9 +3,9 @@
   <h1>
     Welcome to {{title}}!
   </h1>
-  <button mat-icon-button>
+  <button mat-icon-button (click)="openDialog()">
       <mat-icon aria-label="liked" class="small">favorite</mat-icon>
-      <div class="badge" *ngIf="favorites.length">{{favorites.length}}</div>
+      <div class="badge" *ngIf="favorites?.length">{{favorites?.length}}</div>
   </button>    
 </div>
 <div class="container">

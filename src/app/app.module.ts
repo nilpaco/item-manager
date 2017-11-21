@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import {
   MatButtonModule,
-  MatToolbarModule,
   MatIconModule,
   MatCardModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatDialogModule
 } from '@angular/material';
 import { BidiModule } from '@angular/cdk/bidi';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,11 +16,13 @@ import { AppComponent } from './app.component';
 import { ItemsComponent } from './items/items.component';
 import { ItemsService } from './items.service';
 import { FavoriteService } from './items/favorite.service';
+import { FavoritesDialogComponent } from './favorites-dialog/favorites-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemsComponent,
+    FavoritesDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,9 +34,12 @@ import { FavoriteService } from './items/favorite.service';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    MatToolbarModule
+    MatDialogModule
   ],
   providers: [ ItemsService, FavoriteService ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    FavoritesDialogComponent
+  ]
 })
 export class AppModule { }
