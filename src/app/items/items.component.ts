@@ -3,6 +3,7 @@ import { ItemsService } from '../items.service';
 import { FavoriteService } from './favorite.service';
 import { Subject } from 'rxjs';
 import "rxjs/add/operator/debounceTime";
+import { ItemManager } from '../models/items';
 
 @Component({
   selector: 'app-items',
@@ -12,16 +13,12 @@ import "rxjs/add/operator/debounceTime";
 export class ItemsComponent implements OnInit {
 
   searchQueryChanged: Subject<string> = new Subject<string>();  
-  public items: any[];
+  public items: ItemManager.Item[];
   private page: number = 0;
   public totalItems: number;
   public pageSize: number = 5;
-  public favorites: any[];
-  public filterBy = {
-    search: '',
-    orderBy: '',
-    order: ''
-  };
+  public favorites: ItemManager.Item[];
+  public filterBy: ItemManager.Filter =  new ItemManager.Filter('', '', '');
   public filters = [
     { name: 'title' },
     { name: 'price' },
@@ -102,7 +99,7 @@ export class ItemsComponent implements OnInit {
     this.searchQueryChanged.next($event);    
   }
 
-  parseItems(data): any[] {
+  parseItems(data): ItemManager.Item[] {
     data.forEach(item => {
       const actual = this.favorites.find(favorite => favorite.id === item.id);
       item._liked = (actual) ? true : false;

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { Response } from '@angular/http';
 
 @Injectable()
 export class ItemsService {
@@ -9,7 +10,7 @@ export class ItemsService {
 
   constructor(private http: HttpClient) { }
 
-  public getItems(page: number, filterBy?): Observable<any> {
+  handleFilters(filterBy): string {
     let sorting = '';
     let filtering = '';
     if (filterBy.orderBy && filterBy.order) {
@@ -18,7 +19,12 @@ export class ItemsService {
     if (filterBy.search) {
       filtering = `&q=${filterBy.search}`
     }
-    const url = `${this.url}/items?_page=${page}&_limit=5${sorting}${filtering}`;
+    return `${sorting}${filtering}`
+  }
+
+  public getItems(page: number, filterBy?): Observable<any> {
+    let filter = this.handleFilters(filterBy);
+    const url = `${this.url}/items?_page=${page}&_limit=5${filter}`;
     return this.http.get(url, {observe: 'response'});
   }
 

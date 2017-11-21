@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FavoriteService } from './items/favorite.service';
 import { MatDialog } from '@angular/material';
 import { FavoritesDialogComponent } from './favorites-dialog/favorites-dialog.component';
+import { ItemManager } from './models/items';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { FavoritesDialogComponent } from './favorites-dialog/favorites-dialog.co
 })
 export class AppComponent implements OnInit {
   title = 'Item manager';
-  public favorites: any[];
+  public favorites: ItemManager.Item[];
   
   constructor(
     private data: FavoriteService,
