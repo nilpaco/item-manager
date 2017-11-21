@@ -1,3 +1,12 @@
-<p>
-  favorites-dialog works!
-</p>
+<div class="header">
+  <button mat-icon-button (click)="closeDialog()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div *ngFor="let favorite of data">
+  {{favorite.title}}
+  <button mat-icon-button color="warn" (click)="addFavorites(favorite)">
+      <mat-icon *ngIf="favorite._liked" aria-label="liked">favorite</mat-icon>
+      <mat-icon *ngIf="!favorite._liked" aria-label="not_liked">favorite_outline</mat-icon>        
+    </button>    
+</div>

@@ -23,13 +23,13 @@ export class AppComponent implements OnInit {
 
   openDialog(): void {
     let dialogRef = this.dialog.open(FavoritesDialogComponent, {
-      width: '250px',
+      width: '450px',
+      disableClose: true,
       data: this.favorites 
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.favorites = result;
     });
   }
 
