@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ItemsComponent } from './items/items.component';
 import { ItemsService } from './items.service';
+import { FavoriteService } from './items/favorite.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { ItemsService } from './items.service';
     MatCardModule,
     MatToolbarModule
   ],
-  providers: [ ItemsService ],
+  providers: [ ItemsService, FavoriteService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
