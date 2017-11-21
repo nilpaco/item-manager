@@ -45,7 +45,10 @@ export class ItemsComponent implements OnInit {
   ngOnInit() {
     this.getData(this.page);
     this.data.currentFavoritos.subscribe(favorites => {
-      this.favorites = favorites
+      this.favorites = favorites;
+      if (this.items && this.items.length > 0) {
+        this.items = this.parseItems(this.items);        
+      }
     });
   }
 
