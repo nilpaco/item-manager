@@ -95,7 +95,7 @@ export class ItemsComponent implements OnInit {
     this.getData(this.page);
   }
 
-  valuechange($event) {
+  valuechange($event): void {
     this.searchQueryChanged.next($event);    
   }
 

@@ -18,7 +18,7 @@ export class FavoritesDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  closeDialog() {
+  closeDialog(): void {
     this.dialogRef.close();
   }
 
