@@ -29,7 +29,7 @@ export class ItemsComponent implements OnInit {
     this.getData(this.page);
     this.data.currentFavoritos.subscribe(favorites => {
       this.favorites = favorites
-    });    
+    });
   }
 
   getData(page: number, sortBy?: string): void {

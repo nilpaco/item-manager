@@ -1,23 +1,33 @@
-<span (click)="filter('', 'title')"
-  [ngClass]="{'asc': filterBy.orderBy === 'title' && filterBy.order === 'asc', 'desc': filterBy.orderBy === 'title' && filterBy.order === 'desc'}">
-  Title
-  <mat-icon aria-label="liked"></mat-icon>    
-</span>
-<span (click)="filter('', 'price')" 
-  [ngClass]="{'asc': filterBy.orderBy === 'price' && filterBy.order === 'asc', 'desc': filterBy.orderBy === 'price' && filterBy.order === 'desc'}">
-  Price
-  <mat-icon aria-label="liked"></mat-icon>  
-</span>
-<span (click)="filter('', 'description')"
-  [ngClass]="{'asc': filterBy.orderBy === 'description' && filterBy.order === 'asc', 'desc': filterBy.orderBy === 'description' && filterBy.order === 'desc'}">
-  Description
-  <mat-icon aria-label="liked"></mat-icon>    
-</span>
-<span (click)="filter('', 'email')" 
-  [ngClass]="{'asc': filterBy.orderBy === 'email' && filterBy.order === 'asc', 'desc': filterBy.orderBy === 'email' && filterBy.order === 'desc'}">
-  Email
-  <mat-icon aria-label="liked"></mat-icon>  
-</span>
+<div class="filters">
+  <mat-form-field class="example-form-field">
+    <input matInput type="text" placeholder="Buscar" [(ngModel)]="filterBy.search"/>
+    <button mat-button *ngIf="filterBy.search" matSuffix mat-icon-button aria-label="Clear" (click)="filterBy.search=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <div class="sorting">
+    <span (click)="filter('', 'title')"
+      [ngClass]="{'asc': filterBy.orderBy === 'title' && filterBy.order === 'asc', 'desc': filterBy.orderBy === 'title' && filterBy.order === 'desc'}">
+      Title
+      <mat-icon aria-label="liked"></mat-icon>    
+    </span>
+    <span (click)="filter('', 'price')" 
+      [ngClass]="{'asc': filterBy.orderBy === 'price' && filterBy.order === 'asc', 'desc': filterBy.orderBy === 'price' && filterBy.order === 'desc'}">
+      Price
+      <mat-icon aria-label="liked"></mat-icon>  
+    </span>
+    <span (click)="filter('', 'description')"
+      [ngClass]="{'asc': filterBy.orderBy === 'description' && filterBy.order === 'asc', 'desc': filterBy.orderBy === 'description' && filterBy.order === 'desc'}">
+      Description
+      <mat-icon aria-label="liked"></mat-icon>    
+    </span>
+    <span (click)="filter('', 'email')" 
+      [ngClass]="{'asc': filterBy.orderBy === 'email' && filterBy.order === 'asc', 'desc': filterBy.orderBy === 'email' && filterBy.order === 'desc'}">
+      Email
+      <mat-icon aria-label="liked"></mat-icon>  
+    </span>
+  </div>
+</div>
 <mat-card class="example-card" *ngFor="let item of items">
   <img mat-card-image src="../assets/{{item.image}}" alt="Photo of a Shiba Inu">
     <mat-card-header>
