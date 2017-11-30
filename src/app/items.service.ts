@@ -10,7 +10,7 @@ export class ItemsService {
 
   constructor(private http: HttpClient) { }
 
-  handleFilters(filterBy): string {
+  /*handleFilters(filterBy): string {
     let sorting = '';
     let filtering = '';
     if (filterBy.orderBy && filterBy.order) {
@@ -20,11 +20,10 @@ export class ItemsService {
       filtering = `&q=${filterBy.search}`
     }
     return `${sorting}${filtering}`
-  }
+  }*/
 
-  public getItems(page: number, filterBy?): Observable<any> {
-    let filter = this.handleFilters(filterBy);
-    const url = `${this.url}/items?_page=${page}&_limit=5${filter}`;
+  public getItems(): Observable<any> {
+    const url = `${this.url}/items`;
     return this.http.get(url, {observe: 'response'});
   }
 

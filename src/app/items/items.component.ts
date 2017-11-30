@@ -14,8 +14,9 @@ export class ItemsComponent implements OnInit {
 
   searchQueryChanged: Subject<string> = new Subject<string>();  
   public items: ItemManager.Item[];
-  private page: number = 0;
-  public totalItems: number;
+  private page: number = 1;
+  public limit: number = 5;
+  public totalItems: number = 0;
   public pageSize: number = 5;
   public favorites: ItemManager.Item[];
   public filterBy: ItemManager.Filter =  new ItemManager.Filter('', '', '');
@@ -24,8 +25,9 @@ export class ItemsComponent implements OnInit {
     { name: 'price' },
     { name: 'description' },
     { name: 'email' }
-  ]
-
+  ];
+  filter: ItemManager.Item = new ItemManager.Item();
+  
   constructor(
     private service: ItemsService,
     public data: FavoriteService,
@@ -35,12 +37,12 @@ export class ItemsComponent implements OnInit {
     .distinctUntilChanged()
     .subscribe(search => {
       this.filterBy.search = search;
-      this.getData(this.page);
+      this.getData();
      });
   }
 
   ngOnInit() {
-    this.getData(this.page);
+    this.getData();
     this.data.currentFavoritos.subscribe(favorites => {
       this.favorites = favorites;
       if (this.items && this.items.length > 0) {
@@ -49,12 +51,12 @@ export class ItemsComponent implements OnInit {
     });
   }
 
-  getData(page: number): void {
+  getData(): void {
     this.items = undefined;
-    this.service.getItems(this.page+1, this.filterBy).subscribe(response => {
+    this.service.getItems().subscribe(response => {
       // set timeout to fake server response time
       setTimeout(() => {
-        this.totalItems = response.headers.get('X-Total-Count');
+        this.totalItems = response.body.length;
         this.items = this.parseItems(response.body);  
       }, 1000);
     });
@@ -92,7 +94,7 @@ export class ItemsComponent implements OnInit {
       this.filterBy.order = undefined;
       this.filterBy.orderBy = undefined;
     }
-    this.getData(this.page);
+    this.getData();
   }
 
   valuechange($event): void {
@@ -108,8 +110,7 @@ export class ItemsComponent implements OnInit {
   }
 
   nextPage($event): void {
-    this.page = $event.pageIndex;
-    this.getData($event.pageIndex);
+    this.page = $event.pageIndex+1;
   }
 
 }

@@ -20,12 +20,14 @@ import { ItemsComponent } from './items/items.component';
 import { ItemsService } from './items.service';
 import { FavoriteService } from './items/favorite.service';
 import { FavoritesDialogComponent } from './favorites-dialog/favorites-dialog.component';
+import { ItemFilterPipe } from './pipes/item-filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemsComponent,
     FavoritesDialogComponent,
+    ItemFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,7 @@ import { FavoritesDialogComponent } from './favorites-dialog/favorites-dialog.co
     MatProgressSpinnerModule
   ],
   providers: [ ItemsService, FavoriteService ],
-  bootstrap: [AppComponent],
+  bootstrap: [ AppComponent ],
   entryComponents: [
     FavoritesDialogComponent
   ]

@@ -1,6 +1,6 @@
 <div class="filters">
   <mat-form-field class="example-form-field">
-    <input matInput type="text" placeholder="Buscar" [(ngModel)]="filterBy.search" (ngModelChange)="valuechange($event)"/>
+    <input matInput type="text" placeholder="Buscar"  [(ngModel)]="filter.title"/>
     <button mat-button *ngIf="filterBy.search" matSuffix mat-icon-button aria-label="Clear" (click)="filterBy.search=''; valuechange('')">
       <mat-icon>close</mat-icon>
     </button>
@@ -19,7 +19,7 @@
 <div *ngIf="!items" class="loading">
     <mat-spinner [diameter]="25" [strokeWidth]="3"></mat-spinner>    
 </div>
-<mat-card *ngFor="let item of items">
+<mat-card *ngFor="let item of items | itemfilter:filter | slice:(page-1)*limit:page*limit">
   <img mat-card-image src="../assets/{{item.image}}" alt="{{item.title}}">
     <mat-card-header>
       <button mat-icon-button color="warn" (click)="addFavorites(item)">
@@ -34,7 +34,7 @@
     </mat-card-header>      
 </mat-card>
 
-<mat-paginator [length]="totalItems"
+<mat-paginator [length]="(items | itemfilter:filter)?.length"
   [pageIndex]="0"
   [pageSize]="pageSize" 
   (page)="nextPage($event)">
