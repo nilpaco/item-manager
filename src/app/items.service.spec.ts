@@ -17,11 +17,7 @@ describe('ItemsService', () => {
     expect(service).toBeTruthy();
   }));
   it('should return a list of items', inject([ItemsService], (service: ItemsService) => {
-    service.getItems(0, {
-      search: '',
-      orderBy: '',
-      order: '',
-    }).subscribe((result) => {
+    service.getItems().subscribe((result) => {
       expect(result.body.length).toBeGreaterThan(0);
     });
   }));

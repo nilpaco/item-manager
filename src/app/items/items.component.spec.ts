@@ -8,7 +8,8 @@ import {
   MatPaginatorModule,
   MatDialogModule,
   MatInputModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatSelectModule
 } from '@angular/material';
 import { FavoriteService } from './favorite.service';
 import { ItemsService } from '../items.service';
@@ -16,6 +17,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Subject } from 'rxjs/Subject';
+import { ItemSortPipe } from '../pipes/item-sort.pipe';
+import { ItemFilterPipe } from '../pipes/item-filter.pipe';
 
 describe('ItemsComponent', () => {
   let component: ItemsComponent;
@@ -30,12 +33,13 @@ describe('ItemsComponent', () => {
         MatDialogModule,
         MatPaginatorModule,
         MatInputModule,
+        MatSelectModule,
         MatProgressSpinnerModule,
         FormsModule,
         HttpClientModule,
         BrowserAnimationsModule
       ],
-      declarations: [ ItemsComponent ],
+      declarations: [ ItemsComponent, ItemFilterPipe, ItemSortPipe ],
       providers: [
         FavoriteService,
         ItemsService,
