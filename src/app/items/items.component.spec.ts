@@ -67,7 +67,7 @@ describe('ItemsComponent', () => {
     fixture.detectChanges();
     expect(element.querySelector('mat-spinner')).toBeTruthy();      
   });
-  it('should display a filters', () => {
+  it('should display a filter input', () => {
     const fixture = TestBed.createComponent(ItemsComponent); 
     const app = fixture.componentInstance;
     const element = fixture.nativeElement;
