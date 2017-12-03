@@ -21,13 +21,15 @@ import { ItemsService } from './items.service';
 import { FavoriteService } from './items/favorite.service';
 import { FavoritesDialogComponent } from './favorites-dialog/favorites-dialog.component';
 import { ItemFilterPipe } from './pipes/item-filter.pipe';
+import { ItemSortPipe } from './pipes/item-sort.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemsComponent,
     FavoritesDialogComponent,
-    ItemFilterPipe
+    ItemFilterPipe,
+    ItemSortPipe
   ],
   imports: [
     BrowserModule,

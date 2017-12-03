@@ -1,7 +1,7 @@
 <div class="filters">
   <mat-form-field class="example-form-field">
-    <input matInput type="text" placeholder="Buscar"  [(ngModel)]="filter.title"/>
-    <button mat-button *ngIf="filterBy.search" matSuffix mat-icon-button aria-label="Clear" (click)="filterBy.search=''; valuechange('')">
+    <input matInput type="text" placeholder="Buscar"  [(ngModel)]="filter.title" />
+    <button mat-button *ngIf="filter.title" matSuffix mat-icon-button aria-label="Clear" (click)="filter.title=''">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
@@ -9,8 +9,8 @@
       Sort by:
   </label>
   <div class="sorting">
-    <span *ngFor="let f of filters" (click)="sort(f.name)"
-      [ngClass]="{'asc': filterBy.orderBy === f.name && filterBy.order === 'asc', 'desc': filterBy.orderBy === f.name && filterBy.order === 'desc'}">
+    <span *ngFor="let f of filters" (click)="sort(f.name, order)"
+      [ngClass]="{'asc': fieldName === f.name && order === true, 'desc': fieldName === f.name && order === false}">
       {{ f.name }}
       <mat-icon aria-label="sort"></mat-icon>        
     </span>
@@ -19,7 +19,7 @@
 <div *ngIf="!items" class="loading">
     <mat-spinner [diameter]="25" [strokeWidth]="3"></mat-spinner>    
 </div>
-<mat-card *ngFor="let item of items | itemfilter:filter | slice:(page-1)*limit:page*limit">
+<mat-card *ngFor="let item of items | itemfilter:filter | sort:fieldName:order | slice:(page-1)*limit:page*limit">
   <img mat-card-image src="../assets/{{item.image}}" alt="{{item.title}}">
     <mat-card-header>
       <button mat-icon-button color="warn" (click)="addFavorites(item)">
@@ -35,7 +35,6 @@
 </mat-card>
 
 <mat-paginator [length]="(items | itemfilter:filter)?.length"
-  [pageIndex]="0"
-  [pageSize]="pageSize" 
+  [pageSize]="limit" 
   (page)="nextPage($event)">
 </mat-paginator>

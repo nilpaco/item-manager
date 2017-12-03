@@ -17,7 +17,6 @@ export class ItemsComponent implements OnInit {
   private page: number = 1;
   public limit: number = 5;
   public totalItems: number = 0;
-  public pageSize: number = 5;
   public favorites: ItemManager.Item[];
   public filterBy: ItemManager.Filter =  new ItemManager.Filter('', '', '');
   public filters = [
@@ -27,6 +26,8 @@ export class ItemsComponent implements OnInit {
     { name: 'email' }
   ];
   filter: ItemManager.Item = new ItemManager.Item();
+  order: boolean = false;
+  fieldName: string = '';
   
   constructor(
     private service: ItemsService,
@@ -81,20 +82,16 @@ export class ItemsComponent implements OnInit {
     this.items = this.parseItems(this.items);
   }
 
-  sort(orderBy: string): void {
-    if (this.filterBy.orderBy !== orderBy) {
-      this.filterBy.order = undefined;
+  sort(fieldName: string, order: boolean): void {
+    if (fieldName !== this.fieldName) {
+      this.fieldName = fieldName;      
+      this.order = true;
+    } else if (this.order) {
+      this.order = false;
+    } else if (!this.order) {
+      this.order = undefined;
+      this.fieldName = undefined;
     }
-    this.filterBy.orderBy = orderBy;
-    if (this.filterBy.orderBy && !this.filterBy.order) {
-      this.filterBy.order = 'asc';
-    } else if (this.filterBy.orderBy && this.filterBy.order === 'asc') {
-      this.filterBy.order = 'desc';
-    } else if (this.filterBy.orderBy && this.filterBy.order === 'desc') {
-      this.filterBy.order = undefined;
-      this.filterBy.orderBy = undefined;
-    }
-    this.getData();
   }
 
   valuechange($event): void {
