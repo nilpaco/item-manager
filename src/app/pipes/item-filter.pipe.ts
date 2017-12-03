@@ -12,17 +12,9 @@ export class ItemFilterPipe implements PipeTransform {
         if (!items || !filter) {
             return items;
         }
-        // filter items array, items which match and return true will be kept, false will be filtered out
         return items.filter((item: ItemManager.Item) => this.applyFilter(item, filter));
     }
-  
-    /**
-     * Perform the filtering.
-     * 
-     * @param {ItemManager.Item} item The item to compare to the filter.
-     * @param {ItemManager.Item} filter The filter to apply.
-     * @return {boolean} True if item satisfies filters, false if not.
-     */
+
     applyFilter(item: ItemManager.Item, filter: ItemManager.Item): boolean {
         for (let field in filter) {
             if (filter[field]) {

@@ -36,7 +36,7 @@
 <div *ngIf="!items" class="loading">
     <mat-spinner [diameter]="25" [strokeWidth]="3"></mat-spinner>    
 </div>
-<mat-card *ngFor="let item of items | itemfilter:filter | sort:fieldName:order | slice:(page-1)*limit:page*limit">
+<mat-card *ngFor="let item of items | itemfilter:filter | itemsort:fieldName:order | slice:(page-1)*limit:page*limit">
   <img mat-card-image src="../assets/{{item.image}}" alt="{{item.title}}">
     <mat-card-header>
       <button mat-icon-button color="warn" (click)="addFavorites(item)">

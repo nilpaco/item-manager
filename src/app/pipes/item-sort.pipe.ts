@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { ItemManager } from './../models/items';
 
 @Pipe({
-  name: "sort"
+  name: "itemsort"
 })
 export class ItemSortPipe implements PipeTransform {
   transform(array: ItemManager.Item[], field: string, order: boolean): ItemManager.Item[] {

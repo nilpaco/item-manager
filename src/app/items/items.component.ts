@@ -4,6 +4,7 @@ import { FavoriteService } from './favorite.service';
 import { Subject } from 'rxjs';
 import "rxjs/add/operator/debounceTime";
 import { ItemManager } from '../models/items';
+import { Filters } from '../models/filters';
 
 @Component({
   selector: 'app-items',
@@ -19,13 +20,8 @@ export class ItemsComponent implements OnInit {
 
   public favorites: ItemManager.Item[];
 
-  public filters = [
-    { name: 'title' },
-    { name: 'price' },
-    { name: 'description' },
-    { name: 'email' }
-  ];
-  public filter: ItemManager.Item = new ItemManager.Item();
+  public filters = Filters;
+  public filter = {};
   public order: boolean = false;
   public fieldName: string;
   public filterBy: string;
@@ -100,7 +96,7 @@ export class ItemsComponent implements OnInit {
   }
 
   reset():void {
-    this.filter = new ItemManager.Item();
+    this.filter = {};
   }
 
 }

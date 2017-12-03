@@ -8,15 +8,4 @@ export namespace ItemManager {
         image: string;
         _liked?: boolean;    
     }
-    export class Filter {
-        search: string;
-        orderBy: string;
-        order: string;
-
-        constructor(search, orderBy, order) {
-            this.search = search;
-            this.orderBy = orderBy;
-            this.order = order;
-        }
-    }
 }

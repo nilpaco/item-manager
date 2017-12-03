@@ -10,18 +10,6 @@ export class ItemsService {
 
   constructor(private http: HttpClient) { }
 
-  /*handleFilters(filterBy): string {
-    let sorting = '';
-    let filtering = '';
-    if (filterBy.orderBy && filterBy.order) {
-      sorting = `&_sort=${filterBy.orderBy}&_order=${filterBy.order}`;
-    }
-    if (filterBy.search) {
-      filtering = `&q=${filterBy.search}`
-    }
-    return `${sorting}${filtering}`
-  }*/
-
   public getItems(): Observable<any> {
     const url = `${this.url}/items`;
     return this.http.get(url, {observe: 'response'});
