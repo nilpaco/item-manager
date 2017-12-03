@@ -1,10 +1,12 @@
-import { Pipe } from "@angular/core";
+import { Pipe, PipeTransform } from "@angular/core";
+
+import { ItemManager } from './../models/items';
 
 @Pipe({
   name: "sort"
 })
-export class ItemSortPipe {
-  transform(array: any[], field: string, order: boolean): any[] {
+export class ItemSortPipe implements PipeTransform {
+  transform(array: ItemManager.Item[], field: string, order: boolean): ItemManager.Item[] {
     if (!field) {
         return array;
     }

@@ -1,10 +1,27 @@
 <div class="filters">
-  <mat-form-field class="example-form-field">
-    <input matInput type="text" placeholder="Buscar"  [(ngModel)]="filter.title" />
-    <button mat-button *ngIf="filter.title" matSuffix mat-icon-button aria-label="Clear" (click)="filter.title=''">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
+  <div class="inputs">
+    <mat-form-field>
+      <mat-select placeholder="Search by:" [(ngModel)]="filterBy" (ngModelChange)="reset()">
+        <mat-option *ngFor="let f of filters" [value]="f.name">
+          {{ f.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <ng-container [ngSwitch]="filterBy">
+        <mat-form-field *ngSwitchCase="'price'">
+            <input matInput type="number" placeholder="Buscar"  [(ngModel)]="filter[filterBy]" [disabled]="!filterBy" />
+            <button mat-button *ngIf="filter[filterBy]" matSuffix mat-icon-button aria-label="Clear" (click)="filter[filterBy]=''">
+              <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field *ngSwitchDefault>
+          <input matInput type="text" placeholder="Buscar"  [(ngModel)]="filter[filterBy]" [disabled]="!filterBy" />
+          <button mat-button *ngIf="filter[filterBy]" matSuffix mat-icon-button aria-label="Clear" (click)="filter[filterBy]=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+    </ng-container>
+  </div>
   <label>
       Sort by:
   </label>

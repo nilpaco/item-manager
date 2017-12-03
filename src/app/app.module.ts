@@ -9,7 +9,8 @@ import {
   MatPaginatorModule,
   MatDialogModule,
   MatInputModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatSelectModule
 } from '@angular/material';
 import { BidiModule } from '@angular/cdk/bidi';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -43,6 +44,7 @@ import { ItemSortPipe } from './pipes/item-sort.pipe';
     MatCardModule,
     MatDialogModule,
     MatInputModule,
+    MatSelectModule,
     FormsModule,
     MatProgressSpinnerModule
   ],

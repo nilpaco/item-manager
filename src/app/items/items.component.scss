@@ -13,7 +13,7 @@
             justify-content: space-between;
         }
         span {
-            text-transform: uppercase;
+            text-transform: capitalize;
             cursor: pointer;
         }
         mat-icon {
@@ -54,5 +54,26 @@
                 line-height: 45px;
             }
         }
+    }
+    .inputs {
+        display: flex;
+        flex-direction: row;
+        mat-form-field {
+            mat-select {
+                text-transform: capitalize;
+            }
+        }
+        mat-form-field:first-child {
+            width: 25%;
+            margin-right: 5px;
+        }
+        mat-form-field:last-child {
+            flex: 1;
+        }
+    }
+}
+::ng-deep mat-option {
+    .mat-option-text {
+        text-transform: capitalize;
     }
 }

@@ -12,35 +12,28 @@ import { ItemManager } from '../models/items';
 })
 export class ItemsComponent implements OnInit {
 
-  searchQueryChanged: Subject<string> = new Subject<string>();  
   public items: ItemManager.Item[];
   private page: number = 1;
   public limit: number = 5;
   public totalItems: number = 0;
+
   public favorites: ItemManager.Item[];
-  public filterBy: ItemManager.Filter =  new ItemManager.Filter('', '', '');
+
   public filters = [
     { name: 'title' },
     { name: 'price' },
     { name: 'description' },
     { name: 'email' }
   ];
-  filter: ItemManager.Item = new ItemManager.Item();
-  order: boolean = false;
-  fieldName: string = '';
-  
+  public filter: ItemManager.Item = new ItemManager.Item();
+  public order: boolean = false;
+  public fieldName: string;
+  public filterBy: string;
+
   constructor(
     private service: ItemsService,
     public data: FavoriteService,
-  ) {
-    this.searchQueryChanged
-    .debounceTime(1500)
-    .distinctUntilChanged()
-    .subscribe(search => {
-      this.filterBy.search = search;
-      this.getData();
-     });
-  }
+  ) { }
 
   ngOnInit() {
     this.getData();
@@ -94,10 +87,6 @@ export class ItemsComponent implements OnInit {
     }
   }
 
-  valuechange($event): void {
-    this.searchQueryChanged.next($event);    
-  }
-
   parseItems(data): ItemManager.Item[] {
     data.forEach(item => {
       const actual = this.favorites.find(favorite => favorite.id === item.id);
@@ -108,6 +97,10 @@ export class ItemsComponent implements OnInit {
 
   nextPage($event): void {
     this.page = $event.pageIndex+1;
+  }
+
+  reset():void {
+    this.filter = new ItemManager.Item();
   }
 
 }
